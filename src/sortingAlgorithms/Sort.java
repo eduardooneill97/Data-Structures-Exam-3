@@ -21,18 +21,37 @@ public class Sort {
 		}
 	}
 	
-	public static void pairSort(int[] arr) {
-		int range = 1;
-		while(range<= arr.length/2) {
-			int low = 0, m = low+range-1, sup = m+range;
-			while(sup<arr.length) {
-				merge(arr, low, m, sup);
-				low = sup+1;
-				m = low+range-1;
-				sup = m+range;
-			}
-			range++;
+	public static void pairSort(int[] arr) {	//Duda para el profesor.
+//		int range = 1;
+//		while(range<= arr.length/2) {
+//			int low = 0, m = low+range-1, sup = m+range;
+//			while(sup<arr.length) {
+//				merge(arr, low, m, sup);
+//				low = sup+1;
+//				m = low+range-1;
+//				sup = m+range;
+//			}
+//			range++;
+//		}
+		
+		int low = 0, m = low, sup = m+1;
+		while(sup<arr.length) {
+			merge(arr, low, m, sup);
+			low = sup+1;
+			m = low;
+			sup = m+1;
 		}
+		low = 0;
+		m = 1;
+		sup = m+2;
+		while(sup<arr.length) {
+			merge(arr, low, m, sup);
+			low = 0;
+			m = sup;
+			sup = m+2;
+		}
+		if(arr.length%2 != 0)
+			merge(arr, 0, arr.length-2, arr.length-1);
 	}
 	
 	private static void makeHeap(int[] arr) {
